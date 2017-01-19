@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import mongoengine 
-mongoengine.connect(db="online_db",
-    host="localhost")
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
