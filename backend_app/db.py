@@ -3,6 +3,7 @@
 	
 # 	db.connect()
 # 	db.disconnect()
+
 # 	db.create_collection("collection_name")
 # 	db.is_collection_present("collection_name")
 # 	db.insert_log(username, client_id, log[note_hash])
