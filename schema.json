@@ -1,0 +1,31 @@
+{
+//  user collection
+	"user": {
+		"user_id": "asiy8asyuhk",
+		"clients": [ {
+			"client_id": "hp pavilion dv6"}
+		],
+		"username": "ankity10",
+		"full name": "Ankit Yadav",
+		"email": "ankit@siteflu.com",
+		"mob": 8087850104,
+	},
+
+
+
+	
+// logs collection
+	"userid_log": {
+		"client_id": "hp pavilion dv6",
+		"note_hash": "sdf3safa"
+	},
+// notes collection
+	"userid_notes": {
+		"note_id": "asd3rfe3r4tyh5ews",
+		"note_hash": "45g65735et",
+		"window_title": "gedit",
+		"process_name": "gedit",
+		"change_count": 0
+	},
+
+}
