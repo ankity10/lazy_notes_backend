@@ -1,0 +1,58 @@
+if(client changes note)
+{
+	if(note is not present in local_log)
+		increase note_count
+	insert note_hash, note text in local_db
+}
+
+if(client is online)
+{
+	Client will send request for number of online logs and mx_notes
+	n = no of online logs
+	no_of_requests = ceil(n/mx_notes)
+
+	for(i in range(0,no_of_requests))
+	{
+		send request for online logs with i
+	}
+	Client will send request to delete the online logs 
+
+	Delete the online log
+	
+	On the client side:
+
+	for all online logs of client
+	{
+		online_note = take_next_log()
+		local_note = note in local_log where note_hash is online_note.note_hash
+
+		if(local_note is None) 
+		{
+			update local_db with the online_note
+		}
+		else
+		{
+			if(online_note.count > local_note.count)
+			{
+				if(len(online_note.note_text)>1)
+					update local_db with merge conflict of all note_text
+				else
+					update local_db with online_note
+			}
+			else if(local_note.count > online_note.count)
+			{
+				pass
+			}
+			else
+			{
+				Save note as merge conflict 
+			}
+		}
+	}
+
+	for all notes with local_log.count > online_log.count
+	{
+		Send log to online logs of other PCs
+		Delete log
+	}
+}
