@@ -16,16 +16,19 @@
 	
 // logs collection
 	"userid_log": {
-		"client_id": "hp pavilion dv6",
-		"note_hash": "sdf3safa"
+		"from_client_id": "hp pavilion dv6",
+		"to_client_id": "Sony",
+		"note_hash": "sdf3safa",
+		"note_text": "Welcome"
 	},
+
 // notes collection
 	"userid_notes": {
 		"note_id": "asd3rfe3r4tyh5ews",
 		"note_hash": "45g65735et",
 		"window_title": "gedit",
 		"process_name": "gedit",
-		"change_count": 0
+		"note_text": "Welcome"
 	},
 
 }
