@@ -15,14 +15,13 @@
 import pymongo
 
 DEBUG = True
-if DEBUG:
-	from colorama import init, Fore, Style
-	init(autoreset=True)
-else:
-	def 
+
 
 def dprint(text):
+	text = str(text)
 	if DEBUG:
+		from colorama import init, Fore, Style
+		init(autoreset=True)
 		print(Fore.RED + Style.BRIGHT 
 			  + text)
 	else:
@@ -50,20 +49,20 @@ class Db:
 		if db==None:
 			db_name = Db.DB_NAME
 		else:
-			db_name = 
+			db_name = db
 		self.db = self.db_client[db_name]
 
 	def __del__(self):
 		try:
 			self.db_client.close()
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def get_collection_names(self):
 		try:
 			return (self.db.collection_names())
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def disconnect(self):
 		self.__del__()
@@ -76,33 +75,42 @@ class Db:
 			self.db[username + "_notes"].insert_one(note)
 			print("Note inserted successfully")
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def update_note(self, username, client_id, note):
 		try:
 			self.db[username + "_notes"].find_one_and_replace({'note_hash': note['note_hash']}, note)
 			print("Note updated successfully")
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def read_note(self, username, note_hash):
 		try:
 			return self.db[username + "_notes"].find_one({'note_hash': note_hash})
 		except Exception as e:
-			dprint(e)
+			print(e)
+
+	def is_log_present(self, username, note_hash, from_client_id, to_client_id):
+		try:
+			return (self.db[username + "_notes"].find_one({
+										'to_client_id': to_client_id, 
+										'from_client_id': from_client_id,
+										'note_hash': note_hash }) is not None)
+		except Exception as e:
+			print(e)
 
 	def insert_log(self, username, log):
 		try:
 			self.db[username + "_logs"].insert_one(dict(log))
 			print("Log inserted successfully!")
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def read_logs(self, username, client_id):
 		try:
 			return self.db[username + "_logs"].find({'to_client_id': client_id})
 		except Exception as e:
-			dprint(e)
+			print(e)
 
 	def delete_log(self, username, to_client_id, from_client_id, note_hash):
 		try:
@@ -112,4 +120,4 @@ class Db:
 										'note_hash': note_hash })
 			print("Log deleted successfully!")
 		except Exception as e:
-			dprint(e)
+			print(e)
