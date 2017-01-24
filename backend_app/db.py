@@ -18,8 +18,6 @@ DEBUG = True
 if DEBUG:
 	from colorama import init, Fore, Style
 	init(autoreset=True)
-else:
-	def 
 
 def dprint(text):
 	if DEBUG:
@@ -50,7 +48,7 @@ class Db:
 		if db==None:
 			db_name = Db.DB_NAME
 		else:
-			db_name = 
+			db_name = db
 		self.db = self.db_client[db_name]
 
 	def __del__(self):
@@ -100,7 +98,7 @@ class Db:
 
 	def read_log(self, username, client_id):
 		try:
-			return self.db[username + "_logs"].find_one({'client_id': client_id})
+			return self.db[username + "_logs"].find({'client_id': client_id})
 		except Exception as e:
 			dprint(e)
 

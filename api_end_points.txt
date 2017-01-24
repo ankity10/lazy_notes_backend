@@ -1,0 +1,24 @@
+
+
+1. get_number_of _logs(userid, client_id)
+	return mx_notes, number_of_log
+	mx_notes = max_number_of_notes
+	
+	GET REQUEST
+
+2. get_logs(userid, client_id)
+	return logs_object with specified range
+	and will delete the returned logs
+	max_result = mx_notes
+	
+	GET REQUEST
+
+3. update_note(userid, client_id, not_obj)
+	return the status of update
+	will update the notes and generate logs for other clients
+	
+	POST REQUEST
+
+4. resolve_merge_conflict(userid, client_id, note_obj)
+
+	POST REQUEST
