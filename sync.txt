@@ -94,12 +94,14 @@ resolve_merge_conflict(from_client, note_hash, note_text, user) //Only when clie
 		{
 			if(user_online_log.find(from_client, to_client, note_hash) is True)
 			{
-				find_and_replace the log
-			}
-			else
-			{
-				insert the log
+				find_and_delete the log
 			}
 		}
-	}	
+	}
+
+	for to_client in l
+	{
+		insert the log
+	}
+
 }
