@@ -136,6 +136,6 @@ REST_FRAMEWORK = {
 # SESSION_ENGINE = 'mongoengine.django.sessions'
 # SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
-# AUTH_USER_MODEL = 'api_auth.User'
+AUTH_USER_MODEL = 'backend_app.User'
 
 # AUTHENTICATION_BACKENDS = ('mongoengine.django.auth.MongoEngineBackend',)
