@@ -2,16 +2,17 @@
 //  user collection
 	"user": {
 		"user_id": "asiy8asyuhk",
-		"clients": [ {
-			"client_id": "hp pavilion dv6"}
-		],
 		"username": "ankity10",
 		"full name": "Ankit Yadav",
 		"email": "ankit@siteflu.com",
 		"mob": 8087850104,
 	},
 
-
+// clients collection
+	"clients": {
+		"username": "ankity10",
+		"client": "HP",
+	}
 
 	
 // logs collection

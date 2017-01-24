@@ -13,17 +13,20 @@
 # 	db.update_note(username, note, client_id)
 # 	db.read_note(username, note_hash)
 import pymongo
-
+from backend_app.models import *
 
 DEBUG = True
-if DEBUG:
-	from colorama import init, Fore, Style
-	init(autoreset=True)
+
 
 def dprint(text):
+	text = str(text)
 	if DEBUG:
+		from colorama import init, Fore, Style
+		init(autoreset=True)
 		print(Fore.RED + Style.BRIGHT 
 			  + text)
+	else:
+		print(text)
 
 class Db:
 
@@ -31,7 +34,7 @@ class Db:
 	HOST = "localhost"
 	PORT = 27017
 
-	def __init__(self):
+	def __init__(self, db=None):
 		self.db_client = pymongo.MongoClient(host=Db.HOST,
 											 port=Db.PORT,
 											 connectTimeoutMS=10000, 
@@ -44,7 +47,10 @@ class Db:
 			dprint("Application startup cannot proceed. Apllication is exiting.")
 			dprint("Please check your mongoDB connection and try again.")
 			exit()
-		db_name = Db.DB_NAME
+		if db==None:
+			db_name = Db.DB_NAME
+		else:
+			db_name = db
 		self.db = self.db_client[db_name]
 
 	def __del__(self):
@@ -53,19 +59,19 @@ class Db:
 		except Exception as e:
 			print(e)
 
-	def __get_collection_names(self):
+	def get_collection_names(self):
 		try:
 			return (self.db.collection_names())
 		except Exception as e:
 			print(e)
 
-	def discconect(self):
+	def disconnect(self):
 		self.__del__()
 
 	def is_collection_present(self, collection_name):
-		return collection_name in self.__get_collection_names()
+		return collection_name in self.get_collection_names()
 
-	def insert_note(self, username, client_id, note):
+	def insert_note(self, username, note):
 		try:
 			self.db[username + "_notes"].insert_one(note)
 			print("Note inserted successfully")
@@ -85,6 +91,15 @@ class Db:
 		except Exception as e:
 			print(e)
 
+	def is_log_present(self, username, note_hash, from_client_id, to_client_id):
+		try:
+			return (self.db[username + "_notes"].find_one({
+										'to_client_id': to_client_id, 
+										'from_client_id': from_client_id,
+										'note_hash': note_hash }) is not None)
+		except Exception as e:
+			print(e)
+
 	def insert_log(self, username, log):
 		try:
 			self.db[username + "_logs"].insert_one(dict(log))
@@ -92,15 +107,23 @@ class Db:
 		except Exception as e:
 			print(e)
 
-	def read_log(self, username, client_id):
+	def read_logs(self, username, client_id):
 		try:
-			return self.db[username + "_logs"].find_one({'client_id': client_id})
+			return self.db[username + "_logs"].find({'to_client_id': client_id})
+
 		except Exception as e:
 			print(e)
 
-	def delete_log(self, username, client_id, note_hash):
+	def delete_log(self, username, to_client_id, from_client_id, note_hash):
 		try:
-			self.db[username + "_logs"].find_one_and_delete({'client_id': client_id, 'note_hash': note_hash})
+			self.db[username + "_logs"].find_one_and_delete({
+										'to_client_id': client_id, 
+										'from_client_id': from_client_id,
+										'note_hash': note_hash })
 			print("Log deleted successfully!")
 		except Exception as e:
 			print(e)
+
+def get_clients(username):
+	clients = Clients.objects.filter(username=username)
+	print(list(clients))
