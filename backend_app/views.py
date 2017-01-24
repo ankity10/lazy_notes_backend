@@ -13,3 +13,4 @@ def index(request):
 def test(request):
 	user = request.user
 	return HttpResponse("hello world in test route " + str(user))
+
