@@ -1,0 +1,105 @@
+Client Side:
+
+if(client changes note)
+{
+	insert note_hash, note text in local_db
+}
+
+if(client sends request to resolve merge conflict)
+{
+	if(Internet is ON)
+	{
+		call resolve_merge_conflict(from_client, note_hash, note_text, user) 
+	}
+	else
+	{
+		Cannot resolve merge Conflict
+	}
+}
+
+if(client is online)
+{
+	Client will send request for number of online logs and mx_notes
+	n = no of online logs of client 
+	no_of_requests = ceil(n/mx_notes)
+
+	for(i in range(0,no_of_requests))
+	{
+		send request for online logs with i
+	}
+
+	Client will send request to delete the online logs 
+
+	Delete the online log
+	
+	On the client side:
+	Make a dict d of note_hash vs all notes for online log
+
+	for key, val in d.items()
+	{
+		local_note = note in local_log where key is online_note.note_hash
+
+		if(local_note is None) 
+		{
+			if len(val) > 1
+			{
+				Show conflict of all val
+			}
+			else
+			{
+				update local_db with the online_note
+			}
+		}
+		else
+		{
+			Show conflict of local_note and all val
+		}
+	}
+
+	for notes in local_log
+	{
+		Send request to server to insert note
+		Delete notes from local_log
+	}
+}
+
+
+Server side:
+
+insert_note(from_client, note_hash, note_text, user)
+{
+	l = list of all clients of user
+	l.remove(from_client)
+	for to_client in l
+	{
+		if(user_online_log.find(from_client, to_client, note_hash) is True)
+		{
+			find_and_replace the log
+		}
+		else
+		{
+			insert the log
+		}
+	}
+}
+
+resolve_merge_conflict(from_client, note_hash, note_text, user) //Only when client is online
+{
+	l, all_users = list of all clients of user
+	l.remove(from_client)
+
+	for from_client in all_users
+	{
+		for to_client in l
+		{
+			if(user_online_log.find(from_client, to_client, note_hash) is True)
+			{
+				find_and_replace the log
+			}
+			else
+			{
+				insert the log
+			}
+		}
+	}	
+}
