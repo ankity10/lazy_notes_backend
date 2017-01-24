@@ -65,13 +65,13 @@ class Db:
 		except Exception as e:
 			dprint(e)
 
-	def discconect(self):
+	def disconnect(self):
 		self.__del__()
 
 	def is_collection_present(self, collection_name):
 		return collection_name in self.get_collection_names()
 
-	def insert_note(self, username, client_id, note):
+	def insert_note(self, username, note):
 		try:
 			self.db[username + "_notes"].insert_one(note)
 			print("Note inserted successfully")
@@ -98,15 +98,18 @@ class Db:
 		except Exception as e:
 			dprint(e)
 
-	def read_log(self, username, client_id):
+	def read_logs(self, username, client_id):
 		try:
-			return self.db[username + "_logs"].find_one({'client_id': client_id})
+			return self.db[username + "_logs"].find({'to_client_id': client_id})
 		except Exception as e:
 			dprint(e)
 
-	def delete_log(self, username, client_id, note_hash):
+	def delete_log(self, username, to_client_id, from_client_id, note_hash):
 		try:
-			self.db[username + "_logs"].find_one_and_delete({'client_id': client_id, 'note_hash': note_hash})
+			self.db[username + "_logs"].find_one_and_delete({
+										'to_client_id': client_id, 
+										'from_client_id': from_client_id,
+										'note_hash': note_hash })
 			print("Log deleted successfully!")
 		except Exception as e:
 			dprint(e)

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-import .utils
-# Create your views here.
+# import .utils
+# # Create your views here.
 
-def index(request):
-	return utils.index_route()
+# def index(request):
+# 	return utils.index_route()
