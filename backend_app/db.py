@@ -92,10 +92,10 @@ class Db:
 
 	def is_log_present(self, username, note_hash, from_client_id, to_client_id):
 		try:
-			return (self.db[username + "_notes"].find_one({
+			return (self.db[username + "_notes"].find({
 										'to_client_id': to_client_id, 
 										'from_client_id': from_client_id,
-										'note_hash': note_hash }) is not None)
+										'note_hash': note_hash }) is not 0)
 		except Exception as e:
 			print(e)
 
