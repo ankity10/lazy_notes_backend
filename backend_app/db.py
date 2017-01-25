@@ -13,6 +13,7 @@
 # 	db.update_note(username, note, client_id)
 # 	db.read_note(username, note_hash)
 import pymongo
+from backend_app.models import *
 
 DEBUG = True
 
@@ -109,6 +110,7 @@ class Db:
 	def read_logs(self, username, client_id):
 		try:
 			return self.db[username + "_logs"].find({'to_client_id': client_id})
+
 		except Exception as e:
 			print(e)
 
@@ -121,3 +123,7 @@ class Db:
 			print("Log deleted successfully!")
 		except Exception as e:
 			print(e)
+
+def get_clients(username):
+	clients = Clients.objects.filter(username=username)
+	print(list(clients))

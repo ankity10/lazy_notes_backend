@@ -25,10 +25,10 @@ if(client is online)
 
 	for(i in range(0,no_of_requests))
 	{
-		send request for online logs with i
+		send request for online logs 
 	}
 
-	Client will send request to delete the online logs 
+	// Client will send request to delete the online logs 
 
 	Delete the online log
 	
