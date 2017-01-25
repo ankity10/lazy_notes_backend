@@ -124,6 +124,9 @@ class Db:
 		except Exception as e:
 			print(e)
 
-def get_clients(username):
-	clients = Clients.objects.filter(username=username)
-	print(list(clients))
+	def get_clients(username):
+		try:
+			clients = Clients.objects.filter(username=username)
+			return(list(clients))
+		except Exception as e:
+			print(e)
