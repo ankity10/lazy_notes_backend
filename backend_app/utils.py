@@ -51,7 +51,7 @@ def resolve_merge_conflict(username, note_hash, from_client_id, note_text, windo
                                          note_hash, 
                                          from_client, 
                                          to_client)):
-                    db_obj(delete_log(username, note_hash, from_client, to_client))
+                    db_obj.delete_log(username, note_hash, from_client, to_client)
     for to_client in to_clients:
         new_log = log(note_hash, note_text, from_client_id, to_client)
         db_obj.insert_log(dict(new_log))
