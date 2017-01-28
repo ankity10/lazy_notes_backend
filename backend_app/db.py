@@ -78,7 +78,7 @@ class Db:
 		except Exception as e:
 			print(e)
 
-	def update_note(self, username, client_id, note):
+	def update_note(self, username, note):
 		try:
 			self.db[username + "_notes"].find_one_and_replace({'note_hash': note['note_hash']}, note)
 			print("Note updated successfully")
@@ -93,10 +93,10 @@ class Db:
 
 	def is_log_present(self, username, note_hash, from_client_id, to_client_id):
 		try:
-			return (self.db[username + "_notes"].find({
+			return (self.db[username + "_logs"].find({
 										'to_client_id': to_client_id, 
 										'from_client_id': from_client_id,
-										'note_hash': note_hash }) is not 0)
+										'note_hash': note_hash }).count() != 0)
 		except Exception as e:
 			print(e)
 
@@ -114,16 +114,26 @@ class Db:
 		except Exception as e:
 			print(e)
 
-	def delete_log(self, username, to_client_id, from_client_id, note_hash):
+	def delete_log(self, username, note_hash, from_client_id, to_client_id):
 		try:
 			self.db[username + "_logs"].find_one_and_delete({
-										'to_client_id': client_id, 
+										'to_client_id': to_client_id, 
 										'from_client_id': from_client_id,
 										'note_hash': note_hash })
 			print("Log deleted successfully!")
 		except Exception as e:
 			print(e)
 
+	def update_log(self, username, log):
+		try:
+			self.db[username + "_notes"].find_one_and_replace({'note_hash': log['note_hash'],
+															   'from_client_id': log['from_client_id'],
+															   'to_client_id': log['to_client_id']}, log)
+			print("Log updated successfully")
+		except Exception as e:
+			print(e)		
+
+
 def get_clients(username):
 	clients = Clients.objects.filter(username=username)
-	print(list(clients))
+	return list(clients)

@@ -29,7 +29,7 @@
 		"note_hash": "45g65735et",
 		"window_title": "gedit",
 		"process_name": "gedit",
-		"note_text": "Welcome"
+		"client": {"hp pavilion dv6": "This is my note", "Sony": "Terminal note"}
 	},
 
 }

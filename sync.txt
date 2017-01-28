@@ -81,6 +81,7 @@ insert_note(from_client, note_hash, note_text, user)
 			insert the log
 		}
 	}
+	Update note in notes DB
 }
 
 resolve_merge_conflict(from_client, note_hash, note_text, user) //Only when client is online
@@ -103,5 +104,5 @@ resolve_merge_conflict(from_client, note_hash, note_text, user) //Only when clie
 	{
 		insert the log
 	}
-
+	Update note in notes DB
 }
