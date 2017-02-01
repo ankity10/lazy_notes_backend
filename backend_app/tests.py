@@ -7,8 +7,8 @@ class DbTest(TestCase):
 	def setup(self):
 		self.db = Db()
 
-	# def tearDown(self):
-
+	def tearDown(self):
+		del self.db
 
 	def test_get_collection_names(self):
 		self.collection_names = ['test_collection1', 'test_collection2']
