@@ -1,35 +1,35 @@
 {
 //  user collection
-	"user": {
-		"user_id": "asiy8asyuhk",
-		"username": "ankity10",
-		"full name": "Ankit Yadav",
-		"email": "ankit@siteflu.com",
-		"mob": 8087850104,
-	},
+    "user": {
+        "user_id": "asiy8asyuhk",
+        "username": "ankity10",
+        "full name": "Ankit Yadav",
+        "email": "ankit@siteflu.com",
+        "mob": 8087850104,
+    },
 
 // clients collection
-	"clients": {
-		"username": "ankity10",
-		"client": "HP",
-	}
+    "clients": {
+        "username": "ankity10",
+        "client": "HP",
+    }
 
-	
+    
 // logs collection
-	"userid_log": {
-		"from_client_id": "hp pavilion dv6",
-		"to_client_id": "Sony",
-		"note_hash": "sdf3safa",
-		"note_text": "Welcome"
-	},
+    "userid_log": {
+        "from_client_id": "hp pavilion dv6",
+        "to_client_id": "Sony",
+        "note_hash": "sdf3safa",
+        "note_text": "Welcome"
+    },
 
 // notes collection
-	"userid_notes": {
-		"note_id": "asd3rfe3r4tyh5ews",
-		"note_hash": "45g65735et",
-		"window_title": "gedit",
-		"process_name": "gedit",
-		"note_text": "Welcome"
-	},
+    "userid_notes": {
+        "note_id": "asd3rfe3r4tyh5ews",
+        "note_hash": "45g65735et",
+        "window_title": "gedit",
+        "process_name": "gedit",
+        "client": {"hp pavilion dv6": "This is my note", "Sony": "Terminal note"}
+    },
 
 }
