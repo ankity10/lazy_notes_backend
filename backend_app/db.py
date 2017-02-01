@@ -13,7 +13,7 @@
 # 	db.update_note(username, note, client_id)
 # 	db.read_note(username, note_hash)
 import pymongo
-from models import *
+from models import Clients
 
 DEBUG = True
 

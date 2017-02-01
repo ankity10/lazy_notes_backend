@@ -20,5 +20,3 @@ class DbTest(TestCase):
 
 		for collection in self.collection_names:
 			self.db[collection].drop()
-
-	# def test_insert_note(self, )
