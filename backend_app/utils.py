@@ -28,7 +28,7 @@ def insert_notes(username, note_hash, note_text, from_client_id, window_title, p
         else:
             db_obj.insert_log(username, dict(new_log))
     #Updating Notes
-    notes_dict = read_note(username, note_hash) 
+    notes_dict = db_obj.read_note(username, note_hash) 
     if(notes_dict == None): #Note not present
         client = {from_client_id: note_text}
         notes_dict = {'note_hash': note_hash, 
@@ -56,13 +56,10 @@ def resolve_merge_conflict(username, note_hash, from_client_id, note_text, windo
         new_log = log(note_hash, note_text, from_client_id, to_client)
         db_obj.insert_log(dict(new_log))
     #Updating Notes
-    notes_dict = read_note(username, note_hash)
+    notes_dict = db_obj.read_note(username, note_hash)
     client = {from_client_id: note_text}
     new_note_dict = {'note_hash': note_hash,
                      'client': client,
                      'window_title': window_title,
                      'process_name': process_name}
-    if(notes_dict == None): #Note not present
-        db_obj.insert_note(username, notes_dict)
-    else:
-        db_obj.update_note(username, notes_dict)
+    db_obj.update_note(username, notes_dict)
