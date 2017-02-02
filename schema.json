@@ -20,7 +20,8 @@
         "from_client_id": "hp pavilion dv6",
         "to_client_id": "Sony",
         "note_hash": "sdf3safa",
-        "note_text": "Welcome"
+        "note_text": "Welcome",
+        "conflict_flag": False,
     },
 
 // notes collection
