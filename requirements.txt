@@ -2,3 +2,5 @@ djangorestframework
 djangorestframework_jwt
 pymongo
 colorama
+channels
+asgi_redis

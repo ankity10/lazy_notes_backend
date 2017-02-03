@@ -1,19 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, User
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-	username = models.CharField(max_length=32, primary_key=True)
-	email = models.CharField(max_length=32, unique=True)
-	password = models.CharField(max_length=32)
-	full_name = models.CharField(max_length=32)
+# class User(AbstractBaseUser, PermissionsMixin):
+# 	username = models.CharField(max_length=32, primary_key=True)
+# 	email = models.CharField(max_length=32, unique=True)
+# 	password = models.CharField(max_length=32)
+# 	full_name = models.CharField(max_length=32)
 
-	objects = UserManager()
+# 	objects = UserManager()
 
-	USERNAME_FIELD ='username'
-	REQUIRED_FIELDS = []
+# 	USERNAME_FIELD ='username'
+# 	REQUIRED_FIELDS = []
 
 
 
